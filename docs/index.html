@@ -1,5 +1,234 @@
+
+
 <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Brian's Home Page</title>
+<link rel="icon" href="bpc.png">
+<style type="text/css">
+<!--
+body {
+	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	background-color: #4E5869;
+	margin: 0;
+	padding: 0;
+	color: #000;
+}
+
+
+ul, ol, dl { 
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	
+	padding-right: 15px;
+	padding-left: 15px; 
+}
+a img { 
+	border: none;
+}
+
+
+a:link {
+	color:#414958;
+	text-decoration: underline; 
+}
+a:visited {
+	color: #4E5869;
+	text-decoration: underline;
+}
+a:hover, a:active, a:focus { 
+	text-decoration: none;
+}
+
+
+.container {
+	width: 80%;
+	max-width: 1260px;
+	min-width: 780px;
+	background-color: #FFF;
+	margin: 0 auto; 
+}
+
+
+.header {
+	background-color: #6F7D94;
+}
+
+
+.sidebar1 {
+	float: left;
+	width: 20%;
+	height: 100%; 
+	background-color: #93A5C4;
+	padding-bottom: 100%;
+	
+}
+.content {
+	padding: 10px 0;
+	width: 80%;
+	float: left;
+	
+    margin-top: 5px;
+	
+}
+
+
+.content ul, .content ol { 
+	padding: 0 15px 15px 40px; 
+}
+
+
+ul.nav {
+	list-style: none; 
+	border-top: 1px solid #666; 
+	margin-bottom: 15px; 
+}
+ul.nav li {
+	border-bottom: 1px solid #666; 
+}
+ul.nav a, ul.nav a:visited { 
+	padding: 5px 5px 5px 15px;
+	display: block; 
+	text-decoration: none;
+	background-color: #8090AB;
+	color: #000;
+}
+ul.nav a:hover, ul.nav a:active, ul.nav a:focus { 
+	background-color: #6F7D94;
+	color: #FFF;
+}
+
+
+.footer {
+	padding: 10px 0;
+	background-color: #6F7D94;
+	position: relative;
+	clear: both; 
+}
+
+
+.fltrt {  
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { 
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { 
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+
+</style></head>
+
 <body>
-hi
+
+<div class="container">
+  <div class="header">
+  <a href="#"><img src="Brian's Jeep.png" alt="" name="me" width="20%" height="90" id="Insert_logo" style="background-color: #8090AB; display:block;" /></a> 
+  
+    </div>
+  <div class="sidebar1">
+    <ul class="nav">
+      <li><a href="http://pages.iu.edu/~briacall/">Home</a></li>
+      <li><a href="http://pages.iu.edu/~briacall/resume.html">Resume</a></li>
+      <li><a href="http://pages.iu.edu/~briacall/socialmedia.html">Social Media</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      
+      <li><a href="contact.html">Contact Me</a></li>
+    </ul>
+    <p></p>
+    </div>
+  <div class="content">
+    <h1>Welcome</h1>
+    <p><center>Welcome to Brian Callahan's Home Page.</center></p> <br>
+    <p>This site is filled information about me and and I like to do, including my resume and contact info.</p>
+    
+    <p>
+    
+    <center><a href="http://pages.iu.edu/~briacall/resume.html">
+    <img src="resumebutton.png" width="139" height="49"></a></center></p>
+    
+    
+    <h2>About me</h2>
+    <p><center><img src="profile.jpg" width="358" height="358"></center></p>
+    <p>
+    I am currently a sophomore at Indiana University in Bloomington, Indiana. Originally I'm from Cincinnati, Ohio, now living in Nashville, Tennessee. I graduated Father Ryan High School, playing Rugby and winning the state championship my Senior year. At Indiana University I am majoring in Computer Science with a minor in Music.
+      
+    In my free time you can usually find me playing with my band or working on my 1977 Jeep.</p>
+    
+        <h2> Projects</h2>
+    
+       <ul>
+      <li>A website I designed for submitting orders for a <a href="projects/pizza/pizza.html">Pizza</a> shop.</li>
+      <li>A website I designed for the 2014 Sochi <a href="projects/Olympics/index.html">Olympics</a>.</li>
+      <li>A website I designed for my family's yearly <a href="projects/Halloween/Index.html">Haunted House</a>.</li>
+      <li>A website I designed to <a href="projects/CHANGE/changeBrian.html">Calculate change</a>.</li>
+      
+      <li>One of the first <a href="projects/first/Callahan-Index.htm">websites</a> I ever made.</li>
+    
+      
+    </ul>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    
+ 
+ <center>   
+    <div class="w3-content w3-section" style="max-width:500px">
+  <img class="mySlides" src="photos/1.jpg" style="width:50%">
+ 
+  <img class="mySlides" src="photos/6.jpg" style="width:50%">
+  
+  <img class="mySlides" src="photos/9.jpg" style="width:50%">
+  <img class="mySlides" src="photos/10.jpg" style="width:50%">
+  
+  <img class="mySlides" src="photos/12.jpg" style="width:50%">
+  <img class="mySlides" src="photos/13.jpg" style="width:50%">
+</div>
+</center>
+
+
+<script>
+var myIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 2000); // Change image every 2 seconds
+}
+</script>
+<center><em>Help of w3schools   </em> </center>
+    
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+  
+    <p><em>"I certify that the content included in this portfolio/website is my own original work (or is cited accurately) and accurate to my knowledge. Work included which was conducted as part of a team or other group is indicated and attributed as such the other team members are named and a true description of my role in the project is included." Brian Patrick Callahan</em></p>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  <div class="footer">
+    <p>Last updated by Brian Callahan on <!-- #BeginDate format:Am1a -->April 18, 2016 3:13 AM<!-- #EndDate -->
+    </div>
+  
+</div>
 </body>
 </html>
