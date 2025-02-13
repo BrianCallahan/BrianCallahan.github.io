@@ -4,62 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Character Dimensions Calculator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        input {
-            margin: 5px;
-        }
-        button {
-            margin-top: 10px;
-        }
-        #results {
-            margin-top: 20px;
-            border-top: 1px solid #ccc;
-            padding-top: 10px;
-        }
-    </style>
 </head>
 <body>
-    <h1>Character Dimensions Calculator</h1>
-    
-    <label for="height">Enter your height (in inches): </label>
-    <input type="number" id="height" min="66" max="96">
-    <button onclick="calculateDimensions()">Calculate</button>
 
-    <div id="results"></div>
+<h2>Character Dimensions Calculator</h2>
 
-    <script>
-        function calculateDimensions() {
-            const height = document.getElementById("height").value;
-            if (!height) {
-                alert("Please enter a height.");
-                return;
-            }
+<label for="height">Enter Height (in inches):</label>
+<input type="number" id="height" name="height">
+<button onclick="calculateDimensions()">Calculate</button>
 
-            fetch('/calculate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ height_in_inches: parseInt(height) }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                let resultsHTML = '<h2>Character Dimensions:</h2><ul>';
-                for (let part in data) {
-                    resultsHTML += `<li><strong>${part}:</strong> ${data[part]}</li>`;
-                }
-                resultsHTML += '</ul>';
-                document.getElementById("results").innerHTML = resultsHTML;
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('There was an error with the calculation.');
-            });
+<h3>Results:</h3>
+<div id="results"></div>
+
+<script>
+    function linearInterpolate(x, x1, y1, x2, y2) {
+        // Interpolate between two values to estimate y for a given x
+        return y1 + ((x - x1) * (y2 - y1)) / (x2 - x1);
+    }
+
+    function roundToNearest16th(value) {
+        // Round the given value to the nearest 16th of an inch
+        let roundedValue = Math.round(value * 16) / 16;
+        return toFraction(roundedValue);
+    }
+
+    function toFraction(value) {
+        // Convert a decimal value to a fraction of the form 'whole-fraction'
+        const denominator = 16;
+        const fraction = Math.round(value * denominator);
+        const whole = Math.floor(fraction / denominator);
+        const numerator = fraction % denominator;
+
+        if (numerator === 0) {
+            return `${whole}"`;
+        } else {
+            return `${whole}-${numerator}/${denominator}"`;
         }
-    </script>
+    }
+
+    function getCharacterDimensions(heightInInches) {
+        const heightData = [66, 72, 84, 96];  // Heights: 5'6", 6', 7', 8"
+
+        const measurements = {
+            "Spine (Including Neck)": [24.75, 26.9375, 31.4375, 35.9375],
+            "Shoulders (Total Width)": [15.9375, 17.3125, 20.25, 23.125],
+            "Upper Arm": [11.9375, 13, 15.25, 17.4375],
+            "Forearm": [9.625, 10.5, 12.25, 13.9375],
+            "Hips (Total Width)": [10.9375, 11.9375, 13.9375, 15.8125],
+            "Upper Leg": [17.5, 19.125, 22.3125, 25.5],
+            "Lower Leg": [14, 15.3125, 17.9375, 20.4375],
+            "Neck (Top of Shoulders to Skull)": [6.25, 6.75, 7.9375, 9]
+        };
+
+        let result = {};
+
+        // Iterate through all body parts and calculate the measurement for the given height
+        for (const bodyPart in measurements) {
+            const values = measurements[bodyPart];
+
+            if (heightInInches <= heightData[0]) {
+                result[bodyPart] = roundToNearest16th(values[0]);
+            } else if (heightInInches >= heightData[heightData.length - 1]) {
+                result[bodyPart] = roundToNearest16th(values[values.length - 1]);
+            } else {
+                for (let i = 0; i < heightData.length - 1; i++) {
+                    if (heightData[i] <= heightInInches && heightInInches < heightData[i + 1]) {
+                        let interpolatedValue = linearInterpolate(heightInInches, heightData[i], values[i], heightData[i + 1], values[i + 1]);
+                        result[bodyPart] = roundToNearest16th(interpolatedValue);
+                        break;
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    function displayResults(dimensions) {
+        let resultHTML = '';
+        for (const part in dimensions) {
+            resultHTML += `<p><strong>${part}:</strong> ${dimensions[part]}</p>`;
+        }
+        document.getElementById('results').innerHTML = resultHTML;
+    }
+
+    function calculateDimensions() {
+        const height = parseInt(document.getElementById('height').value);
+        if (isNaN(height) || height <= 0) {
+            alert('Please enter a valid height in inches.');
+            return;
+        }
+
+        const dimensions = getCharacterDimensions(height);
+        displayResults(dimensions);
+    }
+</script>
+
 </body>
 </html>
